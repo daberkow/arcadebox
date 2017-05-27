@@ -5,10 +5,10 @@
 // it makes detecting changes very simple.
 
 // Buttons 1-6, then left, right, up, down, start select
-uint8_t buttons[12] = {20, 19, 16, 12, 11, 4, 0, 1, 14, 18, 8, 2};
-int keyPress[12]  = {KEY_Z, KEY_X, KEY_C, KEY_A, KEY_S, KEY_D, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_ENTER, KEY_HOME};
+uint8_t buttons[25] = {0,    1,       2,    3,    4,      5,    6,        7,          8,      9,        10,       11,     12,     13,   14,   15,     16,   17,     18,     19,   20,   21,     22,   23, 26};
+int keyPress[25]  = {KEY_Z, KEY_X, KEY_C, KEY_A, KEY_S, KEY_D, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_ENTER, KEY_D, KEY_B, KEY_E, KEY_F, KEY_G, KEY_H, KEY_J, KEY_L, KEY_M, KEY_N, KEY_O, KEY_Y, KEY_T, KEY_T};
 
-Bounce buttonHolder[12] = {
+Bounce buttonHolder[25] = {
   buttonHolder[0] = Bounce(buttons[0], 10),
   buttonHolder[1] = Bounce(buttons[1], 10),
   buttonHolder[2] = Bounce(buttons[2], 10),
@@ -20,11 +20,24 @@ Bounce buttonHolder[12] = {
   buttonHolder[8] = Bounce(buttons[8], 10),
   buttonHolder[9] = Bounce(buttons[9], 10),
   buttonHolder[10] = Bounce(buttons[10], 10),
-  buttonHolder[11] = Bounce(buttons[11], 10)
+  buttonHolder[11] = Bounce(buttons[11], 10),
+  buttonHolder[12] = Bounce(buttons[12], 10),
+  buttonHolder[13] = Bounce(buttons[13], 10),
+  buttonHolder[14] = Bounce(buttons[14], 10),
+  buttonHolder[15] = Bounce(buttons[15], 10),
+  buttonHolder[16] = Bounce(buttons[16], 10),
+  buttonHolder[17] = Bounce(buttons[17], 10),
+  buttonHolder[18] = Bounce(buttons[18], 10),
+  buttonHolder[19] = Bounce(buttons[19], 10),
+  buttonHolder[20] = Bounce(buttons[20], 10),
+  buttonHolder[21] = Bounce(buttons[21], 10),
+  buttonHolder[22] = Bounce(buttons[22], 10),
+  buttonHolder[23] = Bounce(buttons[23], 10),
+  buttonHolder[24] = Bounce(buttons[24], 10)
 };
 
 void setup() {
-  for (int i=0; i < 12; i++){
+  for (int i=0; i < 24; i++){
     pinMode(buttons[i], INPUT_PULLUP);
   }
 }
@@ -33,7 +46,7 @@ void loop() {
   // Update all the buttons.  There should not be any long
   // delays in loop(), so this runs repetitively at a rate
   // faster than the buttons could be pressed and released.
-  for (int i=0; i < 12; i++){
+  for (int i=0; i < 25; i++){
     buttonHolder[i].update();
   }
 
@@ -42,7 +55,7 @@ void loop() {
   // Update the Joystick buttons only upon changes.
   // falling = high (not pressed - voltage from pullup resistor)
   //           to low (pressed - button connects pin to ground)
-  for (int i=0; i < 12; i++){
+  for (int i=0; i < 25; i++){
     if (buttonHolder[i].fallingEdge()) {
       Keyboard.press(keyPress[i]);
     }
@@ -54,7 +67,7 @@ void loop() {
   // is pressed and the release isn't needed.
   // rising = low (pressed - button connects pin to ground)
   //          to high (not pressed - voltage from pullup resistor)
-  for (int i=0; i < 12; i++){
+  for (int i=0; i < 25; i++){
     if (buttonHolder[i].risingEdge()) {
       Keyboard.release(keyPress[i]);
     }
